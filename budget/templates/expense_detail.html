@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block main_block%}
+<div class="container d-flex justify-content-center">
+    <div class="card w-50 mt-5 mb-5" style="width: 18rem;">
+        <div class="card-header text-center">
+            <i class="fa-regular fa-note-sticky"></i>
+            {{form.title|upper}}
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><i class="fa-solid fa-indian-rupee-sign me-2"></i>{{form.amount}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-list me-2"></i>{{form.category}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-user me-2"></i>{{form.owner}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-sort me-2"></i>{{form.priority}}</li>
+            <li class="list-group-item"><i class="fa-solid fa-calendar-days me-2"></i>{{form.created_date|date:"DdMY"}}</li>
+        </ul>
+    </div>
+</div>
+{%endblock%}

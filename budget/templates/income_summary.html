@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%block main_block%}
+
+{%load custom_filters%}
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="fw-bold text-center">total Income:{{income_total.total}}</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4"><canvas id="myChart"></canvas></div>
+                <div class="col-8">
+                    {%for cs in category_summary%}
+                        {{cs.category}}:{{cs.total}}
+                        <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress-bar" style="width: {{cs.total|percentage:income_total.total}}%">{{cs.total|percentage:income_total.total}}%</div>
+                        </div>
+                    {%endfor%}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+{%block script_block%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [{%for cs in category_summary%} "{{cs.category}}",{%endfor%}],
+            datasets: [{
+                label: '# of Votes',
+                data: [{%for cs in category_summary%}"{{cs.total}}",{%endfor%}],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    //priority summary Chart
+    const ctx1 = document.getElementById('priorityChart');
+
+    new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+        labels: [{%for ps in priority_summary%} "{{ps.priority}}", {%endfor%}],
+        datasets: [{
+        label: '# of Votes',
+        data: [{%for ps in priority_summary%} "{{ps.total}}", {%endfor%}],
+        borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+    });
+</script>
+{%endblock%}

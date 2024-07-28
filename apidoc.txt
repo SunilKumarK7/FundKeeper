@@ -1,0 +1,43 @@
+authentication
+
+schema: User
+attributes:[username,email,password]
+
+1) api for creating user account
+    url: http://127.0.0.1:8000/api/register/
+    method:Post
+    body:{
+        username,email,password
+    }  
+
+2) api for adding income
+    url: http://127.0.0.1:8000/api/income/
+    method:Post
+    body:{
+        title,amount,category
+    }  
+
+    authorization:{username,password}
+
+3) api for updating income
+    url : http://127.0.0.1:8000/api/income/{id}/
+    method: Put
+    body={
+        title,amount,category
+    }
+    authorization:{username,password}
+
+4) api for income detail
+   url : http://127.0.0.1:8000/api/income/{id}/
+
+   body:{
+    title,amount,category
+   }
+   authorization:{username,password}
+   
+5) api for income delete
+    url : http://127.0.0.1:8000/api/income/{id}/
+    method: delete
+    body:nill
+    authorization:{username,password}
+ 
